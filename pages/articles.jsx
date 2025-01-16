@@ -1,4 +1,4 @@
-import ArticleCard from '../components/ArticleCard';
+// import ArticleCard from '../components/ArticleCard';
 import styles from '../styles/ArticlesPage.module.css';
 
 const ArticlesPage = ({ articles }) => {
@@ -6,20 +6,19 @@ const ArticlesPage = ({ articles }) => {
     <>
       <h3>
         Recent Posts from{' '}
-        <a
-          href="https://dev.to/itsnitinr"
-          target="_blank"
-          rel="noopener"
-          className={styles.underline}
-        >
-          dev.to
-        </a>
+        {/*<a*/}
+        {/*  href="https://dev.to/itsnitinr"*/}
+        {/*  target="_blank"*/}
+        {/*  rel="noopener"*/}
+        {/*  className={styles.underline}>*/}
+        {/*  dev.to*/}
+        {/*</a>*/}
       </h3>
-      <div className={styles.container}>
-        {articles.map((article) => (
-          <ArticleCard key={article.id} article={article} />
-        ))}
-      </div>
+      {/*<div className={styles.container}>*/}
+      {/*  {articles.map((article) => (*/}
+      {/*    <ArticleCard key={article.id} article={article} />*/}
+      {/*  ))}*/}
+      {/*</div>*/}
     </>
   );
 };
