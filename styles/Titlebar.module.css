@@ -45,7 +45,7 @@
 
 .minimize {
   background: #f1fa8c;
-  margin-left: auto;
+
 }
 
 .maximize {
@@ -54,6 +54,7 @@
 
 .close {
   background: #ff5555;
+  margin-left: auto;
 }
 
 @media screen and (max-width: 900px) {

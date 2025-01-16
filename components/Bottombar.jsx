@@ -26,19 +26,6 @@ const Bottombar = () => {
           <p>0</p>
         </div>
       </div>
-      <div className={styles.container}>
-        <div className={styles.section}>
-          <NextjsIcon className={styles.icon} />
-          <p>Powered by Next.js</p>
-        </div>
-        <div className={styles.section}>
-          <CheckIcon className={styles.icon} />
-          <p>Prettier</p>
-        </div>
-        <div className={styles.section}>
-          <BellIcon />
-        </div>
-      </div>
     </footer>
   );
 };
