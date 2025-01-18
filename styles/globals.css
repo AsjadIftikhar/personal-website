@@ -16,45 +16,45 @@
   background: rgba(97, 218, 251, 0.25);
 }
 
-.node {
+.django {
   border: 0.1rem solid rgb(131, 205, 41);
 }
-.node:hover {
+.django:hover {
   background: rgba(131, 205, 41, 0.25);
 }
 
-.mongodb {
+.postgresql {
   border: 0.1rem solid rgb(67, 153, 52);
 }
-.mongodb:hover {
+.postgresql:hover {
   background: rgba(67, 153, 52, 0.25);
 }
 
-.redux {
+.aws {
   border: 0.1rem solid rgb(118, 74, 188);
 }
-.redux:hover {
+.aws:hover {
   background: rgba(118, 74, 188, 0.25);
 }
 
-.razorpay {
+.paypal {
   border: 0.1rem solid rgb(82, 143, 240);
 }
-.razorpay:hover {
+.paypal:hover {
   background: rgba(82, 143, 240, 0.25);
 }
 
-.material-ui {
+.crm {
   border: 0.1rem solid rgb(25, 118, 210);
 }
-.material-ui:hover {
+.crm:hover {
   background: rgba(25, 118, 210, 0.25);
 }
 
-.bulma {
+.sales {
   border: 0.1rem solid rgb(0, 209, 178);
 }
-.bulma:hover {
+.sales:hover {
   background: rgb(0, 209, 178, 0.25);
 }
 
@@ -65,10 +65,10 @@
   background: rgba(0, 112, 243, 0.25);
 }
 
-.tailwind {
+.telnyx {
   border: 2px solid rgb(6, 182, 212);
 }
-.tailwind:hover {
+.telnyx:hover {
   background: rgba(6, 182, 212, 0.25);
 }
 
