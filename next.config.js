@@ -2,7 +2,7 @@ module.exports = {
   reactStrictMode: true,
   images: {
     domains: [
-      'res.cloudinary.com',
+      'https://asjadiftikhar.site',
       'avatars.githubusercontent.com',
       'imgur.com',
     ],
