@@ -15,11 +15,13 @@ function MyApp({ Component, pageProps }) {
     }
   }, []);
 
+  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
+
   return (
-    <Layout>
+    <>
       <Head title={`Asjad Iftikhar | ${pageProps.title}`} />
-      <Component {...pageProps} />
-    </Layout>
+      {getLayout(<Component {...pageProps} />)}
+    </>
   );
 }
 
