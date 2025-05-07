@@ -6,7 +6,7 @@ import {
   budgetOptions,
   relationshipOptions,
   interestOptions,
-} from "./gift-form-visual-options";
+} from "../helpers/gift-form-visual-options";
 
 // Simple utility for animated selection
 function OptionSelector({ options, selected, onSelect, multi = false }) {
