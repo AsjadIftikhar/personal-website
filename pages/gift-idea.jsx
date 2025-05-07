@@ -1,5 +1,60 @@
 import { useState } from "react";
 import { FaGift, FaSpinner } from "react-icons/fa";
+import {
+  ageOptions,
+  genderOptions,
+  budgetOptions,
+  relationshipOptions,
+  interestOptions,
+} from "./gift-form-visual-options";
+
+// Simple utility for animated selection
+function OptionSelector({ options, selected, onSelect, multi = false }) {
+  return (
+    <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", marginBottom: 12 }}>
+      {options.map((opt) => {
+        const isSelected = multi ? selected.includes(opt.value) : selected === opt.value;
+        return (
+          <button
+            key={opt.value}
+            type="button"
+            onClick={() =>
+              multi
+                ? onSelect(
+                    isSelected
+                      ? selected.filter((v) => v !== opt.value)
+                      : [...selected, opt.value]
+                  )
+                : onSelect(opt.value)
+            }
+            style={{
+              border: isSelected ? "2px solid #9b5de5" : "2px solid #eee",
+              background: isSelected ? "#f1cfff" : "#fff",
+              borderRadius: 16,
+              padding: 12,
+              fontSize: 22,
+              minWidth: 54,
+              minHeight: 54,
+              boxShadow: isSelected ? "0 2px 12px #c77dff44" : "none",
+              transition: "all 0.2s",
+              cursor: "pointer",
+              outline: isSelected ? "2px solid #f15bb5" : "none",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            aria-pressed={isSelected}
+            aria-label={opt.label}
+          >
+            <span style={{ fontSize: 28, marginBottom: 2 }}>{opt.icon}</span>
+            <span style={{ fontSize: 12, color: isSelected ? "#9b5de5" : "#444" }}>{opt.label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 export default function GiftIdeaPage() {
     const [loading, setLoading] = useState(false);
@@ -7,19 +62,15 @@ export default function GiftIdeaPage() {
     const [error, setError] = useState("");
 
     const [formData, setFormData] = useState({
-        age: "",
-        gender: "",
-        budget: "",
-        interests: "",
-        relationship: "",
-    });
+  age: "",
+  gender: "",
+  budget: "",
+  interests: [],
+  relationship: "",
+});
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
+// For visual selection
+const setField = (field, value) => setFormData((prev) => ({ ...prev, [field]: value }));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -70,94 +121,63 @@ export default function GiftIdeaPage() {
                 <div style={styles.formCard}>
                     <h2 style={styles.formTitle}>Describe Who You're Shopping For</h2>
                     <form onSubmit={handleSubmit} style={styles.form}>
-                        <div style={styles.formRow}>
-                            <div style={styles.formGroup}>
-                                <label htmlFor="age" style={styles.label}>
-                                    Age
-                                </label>
-                                <input
-                                    type="number"
-                                    id="age"
-                                    name="age"
-                                    value={formData.age}
-                                    onChange={handleChange}
-                                    style={styles.input}
-                                    placeholder="e.g., 30"
-                                />
-                            </div>
-                            <div style={styles.formGroup}>
-                                <label htmlFor="gender" style={styles.label}>
-                                    Gender
-                                </label>
-                                <select
-                                    id="gender"
-                                    name="gender"
-                                    value={formData.gender}
-                                    onChange={handleChange}
-                                    style={styles.select}
-                                >
-                                    <option value="">Any</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div style={styles.formRow}>
-                            <div style={styles.formGroup}>
-                                <label htmlFor="budget" style={styles.label}>
-                                    Budget (USD)
-                                </label>
-                                <input
-                                    type="text"
-                                    id="budget"
-                                    name="budget"
-                                    value={formData.budget}
-                                    onChange={handleChange}
-                                    style={styles.input}
-                                    placeholder="e.g., 50 or 20-100"
-                                />
-                            </div>
-                            <div style={styles.formGroup}>
-                                <label htmlFor="relationship" style={styles.label}>
-                                    Relationship
-                                </label>
-                                <input
-                                    type="text"
-                                    id="relationship"
-                                    name="relationship"
-                                    value={formData.relationship}
-                                    onChange={handleChange}
-                                    style={styles.input}
-                                    placeholder="e.g., Friend, Sibling"
-                                />
-                            </div>
-                        </div>
-
-                        <div style={styles.formGroupFull}>
-                            <label htmlFor="interests" style={styles.label}>
-                                Interests & Hobbies (comma-separated)
-                            </label>
-                            <input
-                                type="text"
-                                id="interests"
-                                name="interests"
-                                value={formData.interests}
-                                onChange={handleChange}
-                                style={styles.input}
-                                placeholder="e.g., Hiking, Reading, Technology"
-                            />
-                        </div>
-
-                        <button type="submit" style={styles.button} disabled={loading}>
-                            {loading ? (
-                                <FaSpinner style={styles.spinnerIcon} />
-                            ) : (
-                                "Find Gift Ideas"
-                            )}
-                        </button>
-                    </form>
+  <div style={styles.formRow}>
+    <div style={styles.formGroup}>
+      <label style={styles.label}>Age Group</label>
+      <OptionSelector
+        options={ageOptions}
+        selected={formData.age}
+        onSelect={(v) => setField("age", v)}
+      />
+    </div>
+    <div style={styles.formGroup}>
+      <label style={styles.label}>Gender</label>
+      <OptionSelector
+        options={genderOptions}
+        selected={formData.gender}
+        onSelect={(v) => setField("gender", v)}
+      />
+    </div>
+  </div>
+  <div style={styles.formRow}>
+    <div style={styles.formGroup}>
+      <label style={styles.label}>Budget</label>
+      <OptionSelector
+        options={budgetOptions}
+        selected={formData.budget}
+        onSelect={(v) => setField("budget", v)}
+      />
+    </div>
+    <div style={styles.formGroup}>
+      <label style={styles.label}>Relationship</label>
+      <OptionSelector
+        options={relationshipOptions}
+        selected={formData.relationship}
+        onSelect={(v) => setField("relationship", v)}
+      />
+    </div>
+  </div>
+  <div style={styles.formGroupFull}>
+    <label style={styles.label}>Interests & Hobbies</label>
+    <OptionSelector
+      options={interestOptions}
+      selected={formData.interests}
+      onSelect={(v) => setField("interests", v)}
+      multi={true}
+    />
+    <div style={{ fontSize: 12, color: "#888", marginTop: 4 }}>
+      (Pick as many as you like!)
+    </div>
+  </div>
+  <button
+    type="submit"
+    style={{ ...styles.button, fontSize: 20, marginTop: 16, position: "relative", overflow: "hidden" }}
+    disabled={loading}
+  >
+    {loading ? <FaSpinner style={styles.spinnerIcon} /> : <span role="img" aria-label="sparkle">✨</span>}
+    {loading ? " Finding..." : " Find Gift Ideas"}
+  </button>
+</form>
                 </div>
 
                 {error && (
